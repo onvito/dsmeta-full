@@ -1,21 +1,21 @@
-import axios from 'axios';
-import icon from '../../assets/img/Vector.svg'
-import { BASE_URL } from '../../utils/request';
+import axios from "axios";
+import { toast } from "react-toastify";
+import icon from "../../assets/img/Vector.svg";
+import { BASE_URL } from "../../utils/request";
 
-import './styles.css'
+import "./styles.css";
 
 type Props = {
   saleId: number;
+};
+
+function handleClick(id: number) {
+  axios(`${BASE_URL}/sales/${id}/notification`).then((res) => {
+    toast.info("SMS Enviado com sucesso!")
+  });
 }
 
-function handleClick(id:number) {
-  axios(`${BASE_URL}/sales/${id}/notification`)
-    .then(res => {
-      console.log('sucesso!')
-    })
-}
-
-function NotificationButton( {saleId} : Props) {
+function NotificationButton({ saleId }: Props) {
   return (
     <>
       <div className="dsmeta-red-btn" onClick={() => handleClick(saleId)}>
